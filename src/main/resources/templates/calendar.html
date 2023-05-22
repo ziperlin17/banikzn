@@ -1,0 +1,119 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Parcel Sandbox</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" />
+  <script th:inline="javascript">
+    const hiddenDays = /*[[${hiddenDays}]]*/ [];
+    const titleText = /*[[${titleText}]]*/ [];
+    console.log(hiddenDays)
+  </script>
+
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+
+<div style="float: left; width: 600px" id="app"></div>
+
+<script th:inline="javascript">
+  $(document).ready(function () {
+    var data;
+    var hd = [];
+    hd = hiddenDays.split(", ").map(Number);
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd; }
+    if (mm < 10) { mm = '0' + mm; }
+    today = yyyy + '-' + mm + '-' + dd;
+
+    var currentUrl = window.location.href;
+    var id = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+    $.ajax({
+      url: "/calendar-data/"+id,
+      type: "GET",
+      async: false,
+      dataType: "json",
+      success: function(eventData) {
+        data = eventData;
+        console.log(data);
+        console.log(eventData);
+      }
+    });
+
+    $("#app").fullCalendar({
+      timeFormat: 'HH:mm',
+      header: {
+        left: "prev,next today",
+        center: "title",
+        right: "agendaWeek,agendaDay"
+      },
+      firstDay:1,
+      slotLabelFormat:"HH:mm",
+
+      views: {
+        businessWeek: {
+          type: "agendaWeek",
+          title: "Apertura",
+          columnFormat: "dddd",
+          slotDuration:'00:15:00',
+          weekday: ['long'],
+          hiddenDays: hd,
+        }
+      },
+      defaultView: "businessWeek",
+      allDaySlot: false,
+      slotEventOverlap: false,
+      agendaEventMinHeight: 40,
+      columnHeaderFormat: "ddd",
+      defaultDate: today,
+      selectable: false,
+      selectHelper: true,
+      editable: false,
+      eventLimit: true,
+      events: data
+    });
+  });
+</script>
+<script>
+  var divElement = document.querySelector('.fc-center');
+  divElement.innerHTML += titleText;
+  console.log(document.querySelectorAll('#app').item(0).getElementsByTagName("h2").item(0).getAttributeNames())
+</script>
+<form th:action="@{/bookings}" method="post">
+  <div>
+    <label for="complex">Complex:</label>
+    <select id="complex" name="complex">
+      <!-- Опции для выбора комплекса -->
+      <option value="complex1">Complex 1</option>
+      <option value="complex2">Complex 2</option>
+      <!-- ... -->
+    </select>
+  </div>
+  <div>
+    <label for="cost">Cost:</label>
+    <input type="number" id="cost" name="cost" required />
+  </div>
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required />
+  </div>
+  <div>
+    <label for="timeStart">Start Time:</label>
+    <input type="time" id="timeStart" name="timeStart" required />
+  </div>
+  <div>
+    <label for="timeEnd">End Time:</label>
+    <input type="time" id="timeEnd" name="timeEnd" required />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Create Complex</title>
+</head>
+<body>
+<h1>Create Complex</h1>
+
+<form id="complexForm" th:action="@{/add/complex}" th:object="${newComplexDto}" method="post">
+    <div>
+        <script></script>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" th:field="*{description}" required>
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" th:field="*{address}" required>
+    </div>
+    <div>
+        <label for="placeQuantity">Place Quantity:</label>
+        <input type="number" id="placeQuantity" th:field="*{placeQuantity}" required>
+    </div>
+    <div>
+        <label>Days of Work:</label><br>
+        <input type="checkbox" id="MONDAY" name="daysOfWork" value="MONDAY">
+        <label for="MONDAY">Monday</label><br>
+        <input type="checkbox" id="TUESDAY" name="daysOfWork" value="TUESDAY">
+        <label for="TUESDAY">Tuesday</label><br>
+        <input type="checkbox" id="WEDNESDAY" name="daysOfWork" value="WEDNESDAY">
+        <label for="WEDNESDAY">Wednesday</label><br>
+        <input type="checkbox" id="THURSDAY" name="daysOfWork" value="THURSDAY">
+        <label for="THURSDAY">Thursday</label><br>
+        <input type="checkbox" id="FRIDAY" name="daysOfWork" value="FRIDAY">
+        <label for="FRIDAY">Friday</label><br>
+        <input type="checkbox" id="SATURDAY" name="daysOfWork" value="SATURDAY">
+        <label for="SATURDAY">Saturday</label><br>
+        <input type="checkbox" id="SUNDAY" name="daysOfWork" value="SUNDAY">
+        <label for="SUNDAY">Sunday</label><br>
+    </div>
+    <table id="table">
+        <thead>
+        <tr>
+            <th>Day of the Week</th>
+            <th>Opening Time</th>
+            <th>Closing Time</th>
+            <th>Hour Cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="TR_MONDAY" style="display: none">
+            <td>Понедельник</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['MONDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['MONDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['MONDAY']}"></td>
+        </tr>
+        <tr id="TR_TUESDAY" style="display: none">
+            <td>Вторник</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['TUESDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['TUESDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['TUESDAY']}"></td>
+        </tr>
+        <tr id="TR_WEDNESDAY" style="display: none">
+            <td>Среда</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['WEDNESDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['WEDNESDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['WEDNESDAY']}"></td>
+        </tr>
+        <tr id="TR_THURSDAY" style="display: none">
+            <td>Четверг</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['THURSDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['THURSDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['THURSDAY']}"></td>
+        </tr>
+        <tr id="TR_FRIDAY" style="display: none">
+            <td>Пятница</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['FRIDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['FRIDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['FRIDAY']}"></td>
+        </tr>
+        <tr id="TR_SATURDAY" style="display: none">
+            <td>Суббота</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['SATURDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['SATURDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['SATURDAY']}"></td>
+        </tr>
+        <tr id="TR_SUNDAY" style="display: none">
+            <td>Воскресенье</td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['SUNDAY'].openTime}"></td>
+            <td><input type="time" th:field="${newComplexDto.workSchedule['SUNDAY'].closeTime}"></td>
+            <td><input type="number" th:field="${newComplexDto.hourCost['SUNDAY']}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="submit">
+    <script>
+        document.getElementById('complexForm').addEventListener('submit', function(event) {
+            var checkboxes = document.querySelectorAll('input[name="daysOfWork"]:checked');
+            if (checkboxes.length === 0) {
+                event.preventDefault();
+                alert('Please select at least one day of work.');
+            }
+        });
+    </script>
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const rows = document.querySelectorAll('tbody tr');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                const rowId = `TR_${checkbox.value}`;
+                const row = document.getElementById(rowId);
+                const inputs = row.querySelectorAll('input');
+                inputs.forEach((input) => {
+                    input.required = checkbox.checked;
+                });
+                row.style.display = checkbox.checked ? '' : 'none';
+            });
+        });
+    </script>
+</form>
+
+</body>
+</html>
