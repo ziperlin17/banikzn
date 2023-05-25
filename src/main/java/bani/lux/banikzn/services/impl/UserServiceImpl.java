@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
                     .phone(newUserDto.getPhone())
                     .lastName(newUserDto.getLastName())
                     .register_date(LocalDateTime.now())
-                    .state(User.State.CONFIRMED)
+                    .state(User.State.NOT_CONFIRMED)
                     .role(User.Role.USER).build());
         }
         else {

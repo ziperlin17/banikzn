@@ -3,9 +3,12 @@ package bani.lux.banikzn.controllers;
 import bani.lux.banikzn.dto.*;
 import bani.lux.banikzn.models.Booking;
 import bani.lux.banikzn.models.Complex;
+import bani.lux.banikzn.models.User;
+import bani.lux.banikzn.repositories.UserRepository;
 import bani.lux.banikzn.services.BookingService;
 import bani.lux.banikzn.services.ComplexService;
 
+import bani.lux.banikzn.services.UserService;
 import bani.lux.banikzn.utils.DayOfWeekConverter;
 import bani.lux.banikzn.utils.OpenCloseTime;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +28,25 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class ComplexController {
+    private final UserRepository userRepository;
     private final ComplexService complexService;
     private final BookingService bookingService;
 
 
     @GetMapping("/add/complex")
-    public String showNewComplexForm(Model model) {
-        NewComplexDto newComplexDto = new NewComplexDto();
-        model.addAttribute("newComplexDto", newComplexDto);
-        log.error(newComplexDto.getName());
-        return "index";
+    public String showNewComplexForm(Model model, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
+        if (user.getRole().equals(User.Role.ADMIN)) {
+            model.addAttribute("test", principal.getName());
+            NewComplexDto newComplexDto = new NewComplexDto();
+            model.addAttribute("newComplexDto", newComplexDto);
+            return "index";
+        }
+        else {
+            return "403";
+        }
+
+
     }
 
     @GetMapping(value = "/complexes/{id}", produces = MediaType.TEXT_HTML_VALUE)

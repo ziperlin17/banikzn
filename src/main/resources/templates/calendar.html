@@ -9,6 +9,118 @@
     const titleText = /*[[${titleText}]]*/ [];
     console.log(hiddenDays)
   </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.4;
+    }
+    .container {
+      margin-left: 51%;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .description {
+      width: 300px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .address {
+      font-weight: bold;
+    }
+
+    .quantity {
+      font-weight: bold;
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    strong {
+      font-size: 18px;
+    }
+
+    span {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    span.address {
+      font-weight: bold;
+    }
+
+    span.description {
+      width: 100%;
+    }
+
+    span.quantity {
+      font-weight: bold;
+    }
+    form {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="date"],
+    input[type="time"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    #bookingStatus {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #cost {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 
 </head>
 <body>
@@ -18,7 +130,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
 <input id="csrfTokenInput" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-<div style="float: left; width: 600px" id="app"></div>
+<div style="float: left; width: 50%" id="app"></div>
 
 <script th:inline="javascript">
   $(document).ready(function () {
@@ -81,35 +193,37 @@
     });
   });
 </script>
-<form id="bookingForm" th:object="${newBookingDto}" th:action="@{/calendar-data/{id}/checkBooking(id=${id})}" method="post">
-  <label for="dateStart">DateStart:</label>
-  <input type="date" id="dateStart" name="dateStart" required /><br>
-  <label for="dateEnd">DateEnd:</label>
-  <input type="date" id="dateEnd" name="dateEnd" required /><br>
+<div class="container">
+  <strong class="name" th:text="${complexEntity.getName()}"></strong><br>
+  <span class="description" th:text="${complexEntity.getDescription()}"></span><br>
+  <span class="address">Address: </span>
+  <span class="description" th:text="${complexEntity.getAddress()}"></span><br>
+  <span class="quantity">Max places: </span>
+  <span th:text="${complexEntity.getPlaceQuantity()}"></span><br>
 
-  <div id="timeSelection" style="display: none;">
-    <label for="startTime">Start Time:</label>
-    <input type="time" id="startTime" name="startTime" required /><br>
-    <label for="endTime">End Time:</label>
-    <input type="time" id="endTime" name="endTime" required /><br>
-  </div>
+  <form id="bookingForm" th:object="${newBookingDto}" th:action="@{/calendar-data/{id}/checkBooking(id=${id})}" method="post">
+    <label for="dateStart">DateStart:</label>
+    <input type="date" id="dateStart" name="dateStart" required /><br>
+    <label for="dateEnd">DateEnd:</label>
+    <input type="date" id="dateEnd" name="dateEnd" required /><br>
 
-  <div id="bookingStatus" style="display: none;"></div>
-  <div id="cost" style="display: none;"></div>
+    <div id="timeSelection" style="display: none;">
+      <label for="startTime">Start Time:</label>
+      <input type="time" id="startTime" name="startTime" required /><br>
+      <label for="endTime">End Time:</label>
+      <input type="time" id="endTime" name="endTime" required /><br>
+    </div>
 
-  <button form="bookingForm" type="submit" id="checkButton" style="display: none;">Check Booking</button>
-  <button form="bookingForm" type="submit" id="submitButton" style="display: none;">Confirm Booking</button>
+    <div id="bookingStatus" style="display: none;"></div>
+    <div id="cost" style="display: none;"></div>
 
-</form>
+    <button form="bookingForm" type="submit" id="checkButton" style="display: none;">Check Booking</button>
+    <button form="bookingForm" type="submit" id="submitButton" style="display: none;">Confirm Booking</button>
 
-<strong style="" th:text="${complexEntity.getName()}"></strong><br>
-<span style="width: 300px" th:text="${complexEntity.getDescription()}"></span><br>
-<span>Address: </span>
-<span style="width: 300px" th:text="${complexEntity.getAddress()}"></span><br>
-<span>Max places: </span>
-<span th:text="${complexEntity.getPlaceQuantity()}"></span><br>
+  </form>
+</div>
+
 <table id="table">
-
   <thead>
   <tr>
     <th>Day of the Week</th>
@@ -120,10 +234,10 @@
   </thead>
   <tbody>
   <tr th:each="tableSchedule: ${schedule}">
-        <td th:text="${tableSchedule.key}"></td>
-        <td th:text="${tableSchedule.value.getOpenTime()}"></td>
-        <td th:text="${tableSchedule.value.getCloseTime()}"></td>
-        <td th:text="${complexEntity.getSchedule().hourCost.get(tableSchedule.key)}"></td>
+    <td th:text="${tableSchedule.key}"></td>
+    <td th:text="${tableSchedule.value.getOpenTime()}"></td>
+    <td th:text="${tableSchedule.value.getCloseTime()}"></td>
+    <td th:text="${complexEntity.getSchedule().hourCost.get(tableSchedule.key)}"></td>
   </tr>
   </tbody>
 </table>

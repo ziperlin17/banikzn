@@ -25,7 +25,6 @@ public class RestBookingController {
     @PostMapping(value = "/calendar-data/{id}/checkBooking", consumes = "application/json")
     public Map<Boolean,Integer> checkBooking(@PathVariable Long id, @RequestBody BookingRequestDto bookingRequest) {
         Map<Boolean,Integer> isBookingValid = bookingService.checkNewBooking(bookingRequest);
-        log.error(isBookingValid.toString());
         return isBookingValid;
 
     }

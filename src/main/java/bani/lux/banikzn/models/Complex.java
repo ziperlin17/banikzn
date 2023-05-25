@@ -36,4 +36,5 @@ public class Complex {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "schedule_id", referencedColumnName = "id")
     private Schedule schedule;
+
 }

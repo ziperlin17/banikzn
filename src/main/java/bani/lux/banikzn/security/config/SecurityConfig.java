@@ -1,6 +1,8 @@
 package bani.lux.banikzn.security.config;
 
+import bani.lux.banikzn.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -19,39 +22,43 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    private final UserRepository userRepository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
+    //    private final AuthenticationManager authenticationManager;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
-                .ignoringAntMatchers("/calendar-data/**")
+                .ignoringAntMatchers("/calendar-data/","/token/verify/**")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/webjars/**", "/img/**").permitAll()
-                .antMatchers("/login", "/registration").permitAll()
+                .antMatchers("/resources/", "/webjars/", "/img/").permitAll()
+                .antMatchers("/login", "/registration","/token/verify/**").permitAll()
                 .antMatchers("/add/complex").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login").usernameParameter("email").passwordParameter("password")
-                .defaultSuccessUrl("/add/complex")
+                .failureUrl("/login&error").usernameParameter("email").passwordParameter("password")
+                .defaultSuccessUrl("/complexes/28")
                 .permitAll()
-                .and().exceptionHandling().accessDeniedPage("/AccessDenied")
+                .and().exceptionHandling().accessDeniedPage("/302")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-        .and().sessionManagement().maximumSessions(1).expiredUrl("/login");
+                .and().sessionManagement().maximumSessions(1).expiredUrl("/login");
+//        http.addFilterBefore(userStateFilter(), UsernamePasswordAuthenticationFilter.class).userDetailsService(userDetailsService);
+        //TODO фильтр обязательно заработает.....
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -66,4 +73,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    @Bean
+    public UserStateFilter userStateFilter() throws Exception {
+        UserStateFilter userStateFilter = new UserStateFilter(userRepository);
+        userStateFilter.setAuthenticationManager(authenticationManagerBean());
+        return userStateFilter;
+    }
 }
+
+
