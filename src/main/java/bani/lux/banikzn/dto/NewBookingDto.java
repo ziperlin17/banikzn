@@ -14,11 +14,13 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class NewBookingDto {
-    private Complex complex;
+    private Long complexId;
 
     private Integer cost;
 
-    private LocalDate date;
+    private LocalDate dateStart;
+
+    private LocalDate dateEnd;
 
     private LocalTime timeStart;
 

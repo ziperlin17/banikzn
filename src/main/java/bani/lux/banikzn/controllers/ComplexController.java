@@ -1,9 +1,6 @@
 package bani.lux.banikzn.controllers;
 
-import bani.lux.banikzn.dto.BookingDto;
-import bani.lux.banikzn.dto.ComplexDto;
-import bani.lux.banikzn.dto.NewBookingDto;
-import bani.lux.banikzn.dto.NewComplexDto;
+import bani.lux.banikzn.dto.*;
 import bani.lux.banikzn.models.Booking;
 import bani.lux.banikzn.models.Complex;
 import bani.lux.banikzn.services.BookingService;
@@ -43,11 +40,15 @@ public class ComplexController {
     @GetMapping(value = "/complexes/{id}", produces = MediaType.TEXT_HTML_VALUE)
     public String getComplexWithId(@PathVariable Long id, Model model) {
         ComplexDto complex = complexService.getComplexById(id);
+        NewBookingDto newBookingDto = new NewBookingDto();
         Map<DayOfWeek, OpenCloseTime> workSchedule = complex.getSchedule().getWorkSchedule();
         String hiddenDaysString = DayOfWeekConverter.convertToIndices(workSchedule);
         model.addAttribute("schedule", workSchedule);
+        model.addAttribute("newBookingDto", newBookingDto);
         model.addAttribute("hiddenDays", hiddenDaysString);
         model.addAttribute("titleText", complex.getName());
+        model.addAttribute("id", id);
+        model.addAttribute("complexEntity",complex);
         return "/calendar";
     }
 
@@ -72,13 +73,5 @@ public class ComplexController {
     public List<BookingDto> getCalendarData(@PathVariable("id") Long complexId) {
         return bookingService.getBookingData(complexId);
     }
-
-    @GetMapping("/calendar-data/{id}/checkBooking")
-    @ResponseBody
-    public Boolean checkNewBooking(@PathVariable("id") Long complexId,
-                                         @ModelAttribute("newComplexDto") NewBookingDto newBookingDto) {
-        return bookingService.checkNewBooking(newBookingDto);
-    }
-
 
 }

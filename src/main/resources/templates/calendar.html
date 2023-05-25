@@ -16,6 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+<input id="csrfTokenInput" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
 <div style="float: left; width: 600px" id="app"></div>
 
@@ -24,7 +25,6 @@
     var data;
     var hd = [];
     hd = hiddenDays.split(", ").map(Number);
-
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -81,39 +81,188 @@
     });
   });
 </script>
-<script>
-  var divElement = document.querySelector('.fc-center');
-  divElement.innerHTML += titleText;
-  console.log(document.querySelectorAll('#app').item(0).getElementsByTagName("h2").item(0).getAttributeNames())
-</script>
-<form th:action="@{/bookings}" method="post">
-  <div>
-    <label for="complex">Complex:</label>
-    <select id="complex" name="complex">
-      <!-- Опции для выбора комплекса -->
-      <option value="complex1">Complex 1</option>
-      <option value="complex2">Complex 2</option>
-      <!-- ... -->
-    </select>
-  </div>
-  <div>
-    <label for="cost">Cost:</label>
-    <input type="number" id="cost" name="cost" required />
-  </div>
-  <div>
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required />
-  </div>
-  <div>
-    <label for="timeStart">Start Time:</label>
-    <input type="time" id="timeStart" name="timeStart" required />
-  </div>
-  <div>
-    <label for="timeEnd">End Time:</label>
-    <input type="time" id="timeEnd" name="timeEnd" required />
-  </div>
-  <button type="submit">Submit</button>
-</form>
-</body>
+<form id="bookingForm" th:object="${newBookingDto}" th:action="@{/calendar-data/{id}/checkBooking(id=${id})}" method="post">
+  <label for="dateStart">DateStart:</label>
+  <input type="date" id="dateStart" name="dateStart" required /><br>
+  <label for="dateEnd">DateEnd:</label>
+  <input type="date" id="dateEnd" name="dateEnd" required /><br>
 
+  <div id="timeSelection" style="display: none;">
+    <label for="startTime">Start Time:</label>
+    <input type="time" id="startTime" name="startTime" required /><br>
+    <label for="endTime">End Time:</label>
+    <input type="time" id="endTime" name="endTime" required /><br>
+  </div>
+
+  <div id="bookingStatus" style="display: none;"></div>
+  <div id="cost" style="display: none;"></div>
+
+  <button form="bookingForm" type="submit" id="checkButton" style="display: none;">Check Booking</button>
+  <button form="bookingForm" type="submit" id="submitButton" style="display: none;">Confirm Booking</button>
+
+</form>
+
+<strong style="" th:text="${complexEntity.getName()}"></strong><br>
+<span style="width: 300px" th:text="${complexEntity.getDescription()}"></span><br>
+<span>Address: </span>
+<span style="width: 300px" th:text="${complexEntity.getAddress()}"></span><br>
+<span>Max places: </span>
+<span th:text="${complexEntity.getPlaceQuantity()}"></span><br>
+<table id="table">
+
+  <thead>
+  <tr>
+    <th>Day of the Week</th>
+    <th>Opening Time</th>
+    <th>Closing Time</th>
+    <th>Hour Cost</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="tableSchedule: ${schedule}">
+        <td th:text="${tableSchedule.key}"></td>
+        <td th:text="${tableSchedule.value.getOpenTime()}"></td>
+        <td th:text="${tableSchedule.value.getCloseTime()}"></td>
+        <td th:text="${complexEntity.getSchedule().hourCost.get(tableSchedule.key)}"></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<script th:inline="javascript">
+  var currentUrl = window.location.href;
+  var id = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+
+  $(document).ready(function() {
+    $('#dateStart').on('change', function() {
+      var selectedDate = $(this).val();
+
+      if (selectedDate !== '') {
+        $('#timeSelection').show();
+        $('#bookingStatus').text('Choose a time.').show();
+        $('#checkButton').show();
+        $('#dateEnd').show();
+      } else {
+        $('#timeSelection').hide();
+        $('#dateEnd').hide();
+        $('#bookingStatus').hide();
+        $('#checkButton').hide();
+      }
+    });
+
+    document.getElementById("checkButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      var startTime = $('#startTime').val();
+      var endTime = $('#endTime').val();
+      var dateStart = $('#dateStart').val();
+      var dateEnd = $('#dateEnd').val();
+
+      var dateStartInput = document.getElementById("dateStart");
+      var dateEndInput = document.getElementById("dateEnd");
+
+      dateStartInput.addEventListener("change", function() {
+        if (dateStartInput.value) {
+          dateEndInput.value = dateStartInput.value;
+        }
+      });
+
+      var requestData = {
+        startTime: startTime.toString(),
+        endTime: endTime.toString(),
+        dateStart: dateStart.toString(),
+        dateEnd: dateEnd.toString(),
+        complexId: id
+      };
+
+
+      if (startTime !== '' && endTime !== '') {
+        console.log(requestData)
+        $.ajax({
+          url: "/calendar-data/"+id+"/checkBooking",
+          type: "post",
+          contentType: "application/json",
+          data: JSON.stringify(requestData),
+          success: function(response) {
+            if (Object.keys(response).toString() === 'true') {
+              console.log(Object.keys(response))
+              console.log(Object.values(response))
+              $('#bookingStatus').text('Booking is valid.').show();
+              document.getElementById("bookingStatus").style.color="green";
+              $('#submitButton').show();
+              $('#cost').text(Object.values(response).toString()).show()
+
+            } else {
+              $('#bookingStatus').text('The complex is not available at this time or the time is already reserved.').show();
+              document.getElementById("bookingStatus").style.color="red";
+              $('#submitButton').hide();
+              $('#cost').text('');
+            }
+          },
+          error: function() {
+            console.log($(this).serialize()+"!!!")
+            $('#bookingStatus').text('An error occurred. Please try again.').show();
+            $('#submitButton').hide();
+          }
+        });
+      }
+    });
+  });
+
+  const fields = ['dateStart', 'dateEnd', 'startTime', 'endTime'];
+
+  fields.forEach(field => {
+    document.getElementById(field).addEventListener('change', () => {
+      $('#submitButton').hide();
+      $('#bookingStatus').text('');
+      $('#cost').text('');
+    });
+  });
+
+  var csrfToken = document.getElementById("csrfTokenInput").value;
+  console.log(csrfToken);
+
+  document.getElementById("submitButton").addEventListener("click", function(event) {
+    event.preventDefault();
+    var dateStart = document.getElementById("dateStart").value;
+    var dateEnd = document.getElementById("dateEnd").value;
+    var startTime = document.getElementById("startTime").value;
+    var endTime = document.getElementById("endTime").value;
+    var cost = document.getElementById("cost").textContent;
+    console.log(cost +'!!')
+
+    var bookingResponseDto = {
+      complexId: id,
+      cost: cost,
+      dateStart: dateStart,
+      dateEnd: dateEnd,
+      startTime: startTime,
+      endTime: endTime
+    };
+    console.log(bookingResponseDto);
+
+    fetch("/add/booking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken
+      },
+      body: JSON.stringify(bookingResponseDto)
+    })
+            .then(function(response) {
+              if (response.ok) {
+                console.log("Booking added successfully");
+                $('bookingStatus').text('Booking added successfully');
+                location.reload();
+              } else {
+                console.log("Failed to add booking");
+                $('bookingStatus').text('Failed to add booking');
+              }
+            })
+            .catch(function(error) {
+              console.log("Error:", error);
+              $('bookingStatus').text('Failed to add booking');
+            });
+  });
+</script>
+</body>
 </html>

@@ -26,7 +26,9 @@ public class Booking {
 
     private Integer cost;
 
-    private LocalDate date;
+    private LocalDate dateStart;
+
+    private LocalDate dateEnd;
 
     private LocalTime timeStart;
 

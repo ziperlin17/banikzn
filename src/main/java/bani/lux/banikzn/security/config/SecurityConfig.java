@@ -26,16 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .ignoringAntMatchers("/calendar-data/**")
+                .and()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/webjars/**", "/img/**").permitAll()
                 .antMatchers("/login", "/registration").permitAll()
+                .antMatchers("/add/complex").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login?error")
-                .defaultSuccessUrl("/complexes/28", true)
+                .failureUrl("/login").usernameParameter("email").passwordParameter("password")
+                .defaultSuccessUrl("/add/complex")
                 .permitAll()
+                .and().exceptionHandling().accessDeniedPage("/AccessDenied")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

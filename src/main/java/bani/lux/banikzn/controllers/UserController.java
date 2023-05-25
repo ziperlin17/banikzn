@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestParam("username") String username,
+    public ModelAndView login(@RequestParam("email") String email,
                               @RequestParam("password") String password) {
         return new ModelAndView("redirect:/dashboard");
     }
