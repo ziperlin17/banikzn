@@ -1,0 +1,253 @@
+2023-05-26 19:43:41.397 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:43:41.468 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{GET [/payment]}: payment(String)
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+2023-05-26 19:43:41.473 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+	{GET [/complexes]}: showComplexes(String,Model)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+2023-05-26 19:43:41.475 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:43:41.477 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{POST [/login]}: login(String,String)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+	{GET [/login]}: showLoginPage(String,Model)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{GET [/403]}: getForbidden(Model)
+	{GET [/registration]}: showRegistrationForm(Model)
+2023-05-26 19:43:41.479 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:43:41.482 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:43:41.491 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:43:41.498 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:43:41.508 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:43:41.508 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:43:41.508 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:43:41.522 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-05-26 19:44:19.131 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:44:19.203 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{GET [/payment]}: payment(String)
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+2023-05-26 19:44:19.207 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+	{GET [/complexes]}: showComplexes(String,Model)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+2023-05-26 19:44:19.208 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:44:19.209 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{POST [/login]}: login(String,String)
+	{GET [/403]}: getForbidden(Model)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+	{GET [/login]}: showLoginPage(String,Model)
+	{GET [/registration]}: showRegistrationForm(Model)
+2023-05-26 19:44:19.211 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:44:19.213 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:44:19.222 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:44:19.228 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:44:19.238 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:44:19.238 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:44:19.238 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:44:19.252 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-05-26 19:45:33.541 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:45:33.642 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+	{GET [/payment]}: payment(String)
+2023-05-26 19:45:33.649 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/complexes]}: showComplexes(String,Model)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+2023-05-26 19:45:33.650 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:45:33.652 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{GET [/registration]}: showRegistrationForm(Model)
+	{POST [/login]}: login(String,String)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{GET [/403]}: getForbidden(Model)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+	{GET [/login]}: showLoginPage(String,Model)
+2023-05-26 19:45:33.654 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:45:33.656 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:45:33.665 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:45:33.672 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:45:33.682 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:45:33.682 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:45:33.682 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:45:33.695 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-05-26 19:46:32.387 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:46:32.466 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{GET [/payment]}: payment(String)
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+2023-05-26 19:46:32.472 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+	{GET [/complexes]}: showComplexes(String,Model)
+2023-05-26 19:46:32.472 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:46:32.474 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{GET [/registration]}: showRegistrationForm(Model)
+	{GET [/login]}: showLoginPage(String,Model)
+	{POST [/login]}: login(String,String)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{GET [/403]}: getForbidden(Model)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+2023-05-26 19:46:32.477 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:46:32.479 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:46:32.492 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:46:32.498 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:46:32.511 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:46:32.511 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:46:32.511 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:46:32.530 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-05-26 19:47:10.736 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-26 19:47:10.737 TRACE [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.multipart.support.StandardServletMultipartResolver@3a36da5e
+2023-05-26 19:47:10.737 TRACE [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver@7c3223aa
+2023-05-26 19:47:10.737 TRACE [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.theme.FixedThemeResolver@46146832
+2023-05-26 19:47:10.737 TRACE [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Detected DefaultRequestToViewNameTranslator
+2023-05-26 19:47:10.737 TRACE [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Detected SessionFlashMapManager
+2023-05-26 19:47:10.737 DEBUG [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-05-26 19:47:10.737 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-05-26 19:47:10.839 TRACE [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - GET "/login", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2023-05-26 19:47:10.845 TRACE [http-nio-8080-exec-2] o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to bani.lux.banikzn.controllers.UserController#showLoginPage(String, Model)
+2023-05-26 19:47:10.863 TRACE [http-nio-8080-exec-2] o.s.web.method.HandlerMethod - Arguments: [null, {}]
+2023-05-26 19:47:10.866 TRACE [http-nio-8080-exec-2] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Applying default cacheSeconds=-1
+2023-05-26 19:47:10.872 DEBUG [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.7, */*;q=0.8]
+2023-05-26 19:47:10.872 TRACE [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Rendering view [org.thymeleaf.spring5.view.ThymeleafView@4c5c8e84] 
+2023-05-26 19:47:11.120 DEBUG [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed 200 OK, headers={masked}
+2023-05-26 19:47:11.286 TRACE [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet - GET "/login", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2023-05-26 19:47:11.286 TRACE [http-nio-8080-exec-4] o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to bani.lux.banikzn.controllers.UserController#showLoginPage(String, Model)
+2023-05-26 19:47:11.286 TRACE [http-nio-8080-exec-4] o.s.web.method.HandlerMethod - Arguments: [null, {}]
+2023-05-26 19:47:11.286 TRACE [http-nio-8080-exec-4] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Applying default cacheSeconds=-1
+2023-05-26 19:47:11.287 TRACE [http-nio-8080-exec-4] o.s.w.s.v.InternalResourceViewResolver - View with key [login] served from cache
+2023-05-26 19:47:11.287 DEBUG [http-nio-8080-exec-4] o.s.w.s.v.ContentNegotiatingViewResolver - Selected '*/*' given [image/avif, image/webp, image/apng, image/svg+xml, image/*, */*;q=0.8]
+2023-05-26 19:47:11.287 TRACE [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet - Rendering view [org.thymeleaf.spring5.view.ThymeleafView@4c5c8e84] 
+2023-05-26 19:47:11.288 DEBUG [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet - Completed 200 OK, headers={masked}
+2023-05-26 19:47:15.074 TRACE [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet - GET "/add/complex", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2023-05-26 19:47:15.074 TRACE [http-nio-8080-exec-6] o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to bani.lux.banikzn.controllers.ComplexController#showNewComplexForm(Model, Principal)
+2023-05-26 19:47:15.074 TRACE [http-nio-8080-exec-6] o.s.web.method.HandlerMethod - Arguments: [{}, UsernamePasswordAuthenticationToken [Principal=bani.lux.banikzn.security.details.UserDetailsImpl@4820831c, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=599806EEF65ABB90B77469520EA5D714], Granted Authorities=[ADMIN]]]
+2023-05-26 19:47:15.077 TRACE [http-nio-8080-exec-6] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Applying default cacheSeconds=-1
+2023-05-26 19:47:15.078 DEBUG [http-nio-8080-exec-6] o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.7, */*;q=0.8]
+2023-05-26 19:47:15.078 TRACE [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet - Rendering view [org.thymeleaf.spring5.view.ThymeleafView@4cdebcd9] 
+2023-05-26 19:47:15.110 DEBUG [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet - Completed 200 OK, headers={masked}
+2023-05-26 19:47:15.199 TRACE [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - GET "/favicon.ico", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2023-05-26 19:47:15.203 TRACE [http-nio-8080-exec-7] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]] and 4 interceptors
+2023-05-26 19:47:15.205 DEBUG [http-nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+2023-05-26 19:47:15.206 TRACE [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - No view rendering, null ModelAndView returned.
+2023-05-26 19:47:15.206 DEBUG [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND, headers={masked}
+2023-05-26 19:47:15.213 TRACE [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2023-05-26 19:47:15.216 TRACE [http-nio-8080-exec-7] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 2 matching mappings: [{ [/error]}, { [/error], produces [text/html]}]
+2023-05-26 19:47:15.216 TRACE [http-nio-8080-exec-7] o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-05-26 19:47:15.216 TRACE [http-nio-8080-exec-7] o.s.web.method.HandlerMethod - Arguments: [SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.context.HttpSessionSecurityContextRepository$SaveToSessionRequestWrapper@6265be8b]]
+2023-05-26 19:47:15.228 DEBUG [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [image/avif, image/webp, image/apng, image/svg+xml, image/*, */*;q=0.8] and supported [application/json, application/*+json, application/json, application/*+json]
+2023-05-26 19:47:15.229 TRACE [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri May 26 19:47:15 MSK 2023, status=404, error=Not Found, path=/favicon.ico}]
+2023-05-26 19:47:15.270 TRACE [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - No view rendering, null ModelAndView returned.
+2023-05-26 19:47:15.270 DEBUG [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404, headers={masked}
+2023-05-26 19:48:24.850 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:48:24.918 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+	{GET [/payment]}: payment(String)
+2023-05-26 19:48:24.922 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+	{GET [/complexes]}: showComplexes(String,Model)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+2023-05-26 19:48:24.923 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:48:24.924 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{GET [/registration]}: showRegistrationForm(Model)
+	{POST [/login]}: login(String,String)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{GET [/403]}: getForbidden(Model)
+	{GET [/login]}: showLoginPage(String,Model)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+2023-05-26 19:48:24.926 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:48:24.928 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:48:24.937 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:48:24.943 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:48:24.953 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:48:24.953 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:48:24.953 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:48:24.966 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-05-26 19:48:32.230 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-05-26 19:48:32.296 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.BookingController:
+	{POST [/add/booking], consumes [application/json]}: addBooking(BookingResponseDto,ModelMap)
+	{GET [/payment]}: payment(String)
+2023-05-26 19:48:32.300 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.ComplexController:
+	{GET [/calendar-data/{id}]}: getCalendarData(Long)
+	{GET [/add/complex]}: showNewComplexForm(Model,Principal)
+	{POST [/complex/{id}]}: createBooking(Long,NewBookingDto,Principal)
+	{POST [/add/complex]}: createComplex(NewComplexDto)
+	{GET [/complexes/{id}], produces [text/html]}: getComplexWithId(Long,Model)
+	{GET [/complexes]}: showComplexes(String,Model)
+2023-05-26 19:48:32.300 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.RestBookingController:
+	{POST [/calendar-data/{id}/checkBooking], consumes [application/json]}: checkBooking(Long,BookingRequestDto)
+2023-05-26 19:48:32.302 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	b.l.b.c.UserController:
+	{POST [/login]}: login(String,String)
+	{GET [/login]}: showLoginPage(String,Model)
+	{POST [/registration]}: registerUser(NewUserDto,Model,RedirectAttributes)
+	{[GET, POST] [/token/verify/{acceptedToken}/{email}]}: verifyToken(String,String,RedirectAttributes)
+	{GET [/403]}: getForbidden(Model)
+	{GET [/registration]}: showRegistrationForm(Model)
+2023-05-26 19:48:32.304 TRACE [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-05-26 19:48:32.306 DEBUG [main] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 17 mappings in 'requestMappingHandlerMapping'
+2023-05-26 19:48:32.316 DEBUG [main] o.s.w.s.h.BeanNameUrlHandlerMapping - Detected 0 mappings in 'beanNameHandlerMapping'
+2023-05-26 19:48:32.321 TRACE [main] o.s.w.s.f.s.RouterFunctionMapping - 0 RouterFunction(s) in 'routerFunctionMapping'
+2023-05-26 19:48:32.331 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+2023-05-26 19:48:32.331 TRACE [main] o.s.w.s.h.SimpleUrlHandlerMapping - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2023-05-26 19:48:32.332 DEBUG [main] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-05-26 19:48:32.344 DEBUG [main] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
