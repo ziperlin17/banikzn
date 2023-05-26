@@ -37,4 +37,6 @@ public class Complex {
     @JoinColumn(name = "schedule_id", referencedColumnName = "id")
     private Schedule schedule;
 
+    //TODO add pictures Set
+
 }

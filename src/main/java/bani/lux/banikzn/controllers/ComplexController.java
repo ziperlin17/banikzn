@@ -4,6 +4,7 @@ import bani.lux.banikzn.dto.*;
 import bani.lux.banikzn.models.Booking;
 import bani.lux.banikzn.models.Complex;
 import bani.lux.banikzn.models.User;
+import bani.lux.banikzn.repositories.ComplexRepository;
 import bani.lux.banikzn.repositories.UserRepository;
 import bani.lux.banikzn.services.BookingService;
 import bani.lux.banikzn.services.ComplexService;
@@ -13,6 +14,7 @@ import bani.lux.banikzn.utils.DayOfWeekConverter;
 import bani.lux.banikzn.utils.OpenCloseTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class ComplexController {
+    private final ComplexRepository complexRepository;
     private final UserRepository userRepository;
     private final ComplexService complexService;
     private final BookingService bookingService;
@@ -84,6 +87,20 @@ public class ComplexController {
     @ResponseBody
     public List<BookingDto> getCalendarData(@PathVariable("id") Long complexId) {
         return bookingService.getBookingData(complexId);
+    }
+
+    @GetMapping("/complexes")
+    public String showComplexes(@RequestParam(required = false, defaultValue = "name_asc") String sort, Model model) {
+        List<Complex> complexes = switch (sort) {
+            case "name_asc" -> complexRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+            case "name_desc" -> complexRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
+            case "price_asc" -> complexRepository.findAll(Sort.by(Sort.Direction.ASC, "placeQuantity"));
+            case "price_desc" -> complexRepository.findAll(Sort.by(Sort.Direction.DESC, "placeQuantity"));
+            default -> complexRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+        };
+
+        model.addAttribute("complexes", complexes);
+        return "complexes";
     }
 
 }

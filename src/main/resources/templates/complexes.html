@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Complex List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.4;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
+
+    .complex-card {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-bottom: 20px;
+    }
+
+    .check-link {
+      margin-left: auto;
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #4caf50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .complex-card h3 {
+      color: #333333;
+      margin-top: 0;
+    }
+
+    .complex-card p {
+      color: #666666;
+    }
+    .sort-link {
+      display: inline-block;
+      margin-right: 10px;
+      color: #4caf50;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    .sort-link.active {
+      border-bottom-color: #4caf50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h2>Complex List</h2>
+<div style="margin-left: 15%">
+  <!-- Sort by Name -->
+  <a href="#" class="sort-link" onclick="toggleSort('name')">Sort by Name</a>
+
+  <!-- Sort by Price -->
+  <a href="#" class="sort-link" onclick="toggleSort('price')">Sort by Price</a>
+</div>
+<div th:each="complex : ${complexes}" class="complex-card">
+  <a th:href="@{'/complexes/' + ${complex.getId()}}"><h3 th:text="${complex.name}"></h3></a>
+  <p th:text="${complex.description}"></p>
+  <p><strong>Address:</strong> <span th:text="${complex.address}"></span></p>
+  <p><strong>Place Quantity:</strong> <span th:text="${complex.placeQuantity}"></span></p>
+  <a th:href="@{'/complexes/' + ${complex.id}}" class="check-link">Check it</a>
+</div>
+<script>
+  function toggleSort(sortType) {
+    var currentSort = getQueryParam('sort');
+    var newSort;
+
+    if (currentSort === sortType + '_asc') {
+      newSort = sortType + '_desc';
+    } else {
+      newSort = sortType + '_asc';
+    }
+
+    var url = new URL(window.location.href);
+    url.searchParams.set('sort', newSort);
+    window.location.href = url.toString();
+  }
+  function getQueryParam(name) {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+</script>
+</body>
+</html>
