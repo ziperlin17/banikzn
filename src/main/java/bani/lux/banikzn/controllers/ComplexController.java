@@ -1,7 +1,6 @@
 package bani.lux.banikzn.controllers;
 
 import bani.lux.banikzn.dto.*;
-import bani.lux.banikzn.models.Booking;
 import bani.lux.banikzn.models.Complex;
 import bani.lux.banikzn.models.User;
 import bani.lux.banikzn.repositories.ComplexRepository;
@@ -9,7 +8,6 @@ import bani.lux.banikzn.repositories.UserRepository;
 import bani.lux.banikzn.services.BookingService;
 import bani.lux.banikzn.services.ComplexService;
 
-import bani.lux.banikzn.services.UserService;
 import bani.lux.banikzn.utils.DayOfWeekConverter;
 import bani.lux.banikzn.utils.OpenCloseTime;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.time.DayOfWeek;
@@ -46,7 +43,9 @@ public class ComplexController {
             return "index";
         }
         else {
-            return "403";
+            model.addAttribute("code", "403");
+            model.addAttribute("errorMessageLocalized", "Forbidden");
+            return "error";
         }
 
 
@@ -98,7 +97,7 @@ public class ComplexController {
             case "price_desc" -> complexRepository.findAll(Sort.by(Sort.Direction.DESC, "placeQuantity"));
             default -> complexRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
         };
-
+        //TODO average cost
         model.addAttribute("complexes", complexes);
         return "complexes";
     }

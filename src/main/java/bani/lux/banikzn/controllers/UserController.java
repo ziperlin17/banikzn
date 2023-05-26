@@ -1,37 +1,21 @@
 package bani.lux.banikzn.controllers;
 
 import bani.lux.banikzn.dto.NewUserDto;
-import bani.lux.banikzn.exceptions.UserExistsException;
 import bani.lux.banikzn.models.Token;
 import bani.lux.banikzn.models.User;
 import bani.lux.banikzn.repositories.TokenRepository;
 import bani.lux.banikzn.repositories.UserRepository;
 import bani.lux.banikzn.services.UserService;
 import bani.lux.banikzn.utils.ElasticEmailClient;
-import com.fasterxml.jackson.core.JsonParser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -90,19 +74,19 @@ public class UserController {
     public String verifyToken(@PathVariable String acceptedToken, @PathVariable String email, RedirectAttributes redirectAttributes){
         Optional<Token> token = tokenRepository.findByToken(acceptedToken);
         if (token.isPresent()) {
-            User userEntity = userRepository.findByEmail(email).orElseThrow();
-            userEntity.setState(User.State.CONFIRMED);
-            userRepository.save(userEntity);
+            userRepository.updateUserStateByEmail(User.State.CONFIRMED, email);
             redirectAttributes.addFlashAttribute("successMessage", "Account Verified!");
             return "login";
         }
         else {
-            return "403";
+            return "error";
         }
     }
 
     @GetMapping("/403")
-    public String getForbiden(){
-        return "403";
+    public String getForbidden(Model model){
+        model.addAttribute("code", "403");
+        model.addAttribute("errorMessageLocalized","Forbidden");
+        return "error";
     }
 }

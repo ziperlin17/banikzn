@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Complex List</title>
@@ -62,10 +62,7 @@
 <body>
 <h2>Complex List</h2>
 <div style="margin-left: 15%">
-  <!-- Sort by Name -->
   <a href="#" class="sort-link" onclick="toggleSort('name')">Sort by Name</a>
-
-  <!-- Sort by Price -->
   <a href="#" class="sort-link" onclick="toggleSort('price')">Sort by Price</a>
 </div>
 <div th:each="complex : ${complexes}" class="complex-card">
